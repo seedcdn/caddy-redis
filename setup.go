@@ -3,7 +3,6 @@ package redis
 import (
 	"encoding/json"
 
-	"github.com/caddyserver/caddy/v2"
 	"github.com/caddyserver/caddy/v2/caddyconfig"
 	"github.com/redis/go-redis/v9"
 )
@@ -27,9 +26,6 @@ func (r *Redis) Adapt(raw []byte, _ map[string]interface{}) ([]byte, []caddyconf
 		return nil, nil, err
 	}
 
-	caddy.Log().Named("adapters.redis.log").Info(string(raw))
-	caddy.Log().Named("adapters.redis.log").Info(r.config.Adapter.Address)
-	caddy.Log().Named("adapters.redis.log").Info(r.config.Adapter.Password)
 	r.client = redis.NewClient(&redis.Options{
 		DB:       r.config.Adapter.Database,
 		Addr:     r.config.Adapter.Address,
