@@ -50,6 +50,9 @@ func (r *Redis) generateConfiguration() ([]byte, error) {
 
 	var warnings []caddyconfig.Warning
 	config.AppsRaw = make(caddy.ModuleMap)
+	for module, app := range r.config.Apps {
+		config.AppsRaw[module] = caddyconfig.JSON(&app, &warnings)
+	}
 	config.AppsRaw["http"] = caddyconfig.JSON(&apps, &warnings)
 	for _, warning := range warnings {
 		caddy.Log().Named("adapters.redis.loader").Warn(warning.String())

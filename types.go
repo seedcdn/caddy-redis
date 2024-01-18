@@ -1,10 +1,11 @@
 package redis
 
 type Config struct {
-	Admin   interface{}   `json:"admin"`
-	Storage interface{}   `json:"storage"`
-	Logging interface{}   `json:"logging"`
-	Adapter AdapterConfig `json:"adapter"`
+	Apps    map[string]interface{} `json:"apps"`
+	Admin   interface{}            `json:"admin"`
+	Storage interface{}            `json:"storage"`
+	Logging interface{}            `json:"logging"`
+	Adapter AdapterConfig          `json:"adapter"`
 }
 
 type AdapterConfig struct {
