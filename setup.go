@@ -16,8 +16,8 @@ func init() {
 func (r *Redis) Adapt(raw []byte, _ map[string]interface{}) ([]byte, []caddyconfig.Warning, error) {
 	r.config = &Config{
 		Adapter: AdapterConfig{
-			Address:     "localhost:6379",
-			UpdateTimer: "5m", Prefix: "caddy.",
+			Address:        "localhost:6379",
+			UpdateInterval: "5m", Prefix: "caddy.",
 		},
 	}
 

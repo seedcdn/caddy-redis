@@ -12,6 +12,6 @@ type AdapterConfig struct {
 	Address          string `json:"address"`
 	Password         string `json:"password"`
 	Database         int    `json:"database"`
-	UpdateTimer      string `json:"updateTimer"`
+	UpdateInterval   string `json:"updateInterval"`
 	SubscribeUpdates string `json:"subscribeUpdates"`
 }

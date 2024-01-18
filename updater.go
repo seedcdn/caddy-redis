@@ -8,7 +8,7 @@ import (
 	"github.com/caddyserver/caddy/v2"
 )
 
-const defaultUpdateTimer = 5 * time.Minute
+const defaultUpdateInterval = 5 * time.Minute
 
 func (r *Redis) updateConfiguration() {
 	if r.config.Adapter.SubscribeUpdates != "" {
@@ -28,13 +28,13 @@ func (r *Redis) updateConfiguration() {
 		}
 	}
 
-	updateTimer, err := time.ParseDuration(r.config.Adapter.UpdateTimer)
+	updateInterval, err := time.ParseDuration(r.config.Adapter.UpdateInterval)
 	if err != nil {
-		updateTimer = defaultUpdateTimer
+		updateInterval = defaultUpdateInterval
 		caddy.Log().Named("adapters.redis.updater").Debug(
-			fmt.Sprintf("failed to parse update timer value: %v", err))
+			fmt.Sprintf("failed to parse update interval value: %v", err))
 	}
-	ticker := time.NewTicker(updateTimer)
+	ticker := time.NewTicker(updateInterval)
 	go func() {
 		for range ticker.C {
 			config, err := r.generateConfiguration()
